@@ -32,6 +32,10 @@ public class Node<E extends Comparable<E>> {
         return this.data;
     }
 
+    public Node<E> getLeft() {return this.left;}
+
+    public Node<E> getRight() {return this.right;}
+
     @Override
     public String toString() {
         return data.toString();
