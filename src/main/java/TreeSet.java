@@ -1,5 +1,8 @@
+import java.util.Stack;
+
 public class TreeSet<E extends Comparable<E>> {
     private Node<E> root;
+    private static StringBuilder str = new StringBuilder();
 
     public TreeSet(E rootData) {
         this.root = new Node<>(rootData);
@@ -52,17 +55,54 @@ public class TreeSet<E extends Comparable<E>> {
             return;
         }
         if(node.getData().compareTo(data.getData()) == 0) {
-
+            if(node.getLeft() == null && node.getRight() != null) {
+                node = node.getRight();
+            } else if(node.getRight() == null && node.getLeft() != null) {
+                node = node.getLeft();
+            } else if(node.getRight() != null && node.getLeft() != null) {
+                Node<E> minimum = getMinValue(node);
+                remove(minimum.getData());
+                node.setData(minimum.getData());
+            } else {
+                node = null;
+            }
+        } else {
+            if(node.getData().compareTo(data.getData()) > 0) {
+                removeHelper(node.getLeft(), data);
+            } else {
+                removeHelper(node.getRight(), data);
+            }
         }
     }
 
-//    public Node<E> getMinValue(Node<E> node) {
-//
-//    }
+    public Node<E> getMinValue(Node<E> node) {
+        Node<E> current = node;
+        while(current.getLeft() != null) {
+            current = current.getLeft();
+        }
+        return current;
+    }
 
     @Override
     public String toString() {
-        // TODO: You implement this method
-        return null;
+        if (this.root == null) {
+            return null;
+        }
+        str.append("[");
+        toString(this.root);
+        str.replace(str.length() - 2, str.length(), "");
+        str.append("]");
+        return str.toString();
+    }
+
+    private void toString(Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        toString(node.getLeft());
+        str.append(node);
+        str.append(", ");
+        toString(node.getRight());
     }
 }
+

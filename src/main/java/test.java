@@ -5,11 +5,8 @@ public class test {
         tree.insert(7);
         tree.insert(2);
         tree.insert(4);
+        tree.remove(2);
 
-        System.out.println(tree.getRoot());
-        System.out.println(tree.getRoot().getLeft());
-        System.out.println(tree.getRoot().getRight());
-        System.out.println(tree.getRoot().getLeft().getLeft());
-        System.out.println(tree.getRoot().getLeft().getRight());
+        System.out.println(tree);
     }
 }

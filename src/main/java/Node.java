@@ -36,6 +36,8 @@ public class Node<E extends Comparable<E>> {
 
     public Node<E> getRight() {return this.right;}
 
+    public void setData(E data) {this.data = data;}
+
     @Override
     public String toString() {
         return data.toString();
